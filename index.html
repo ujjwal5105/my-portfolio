@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujjwal's Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <style>
+        @keyframes flicker {
+            0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+                opacity: 1;
+            }
+            20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes glitch {
+            0% {
+                clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+                transform: translate(2px);
+            }
+            2% {
+                clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+                transform: translate(-2px);
+            }
+            4% {
+                clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+                transform: translate(1px);
+            }
+            6% {
+                clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+                transform: translate(-1px);
+            }
+            8% {
+                clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+                transform: translate(3px);
+            }
+            10% {
+                clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+                transform: translate(-3px);
+            }
+            12% {
+                clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+                transform: translate(3px);
+            }
+            14% {
+                clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+                transform: translate(-2px);
+            }
+            16% {
+                clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+                transform: translate(3px);
+            }
+            18% {
+                clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+                transform: translate(-3px);
+            }
+            20% {
+                clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+                transform: translate(2px);
+            }
+        }
+
+        .neon-text {
+            color: #fff;
+            text-shadow: 0 0 7px #fff,
+                         0 0 10px #fff,
+                         0 0 21px #0fa,
+                         0 0 42px #0fa,
+                         0 0 82px #0fa,
+                         0 0 92px #0fa,
+                         0 0 102px #0fa,
+                         0 0 151px #0fa;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        .neon-box {
+            box-shadow: 0 0 7px #fff,
+                       0 0 10px #fff,
+                       0 0 21px #0fa,
+                       0 0 42px #0fa;
+            transition: all 0.3s ease;
+        }
+
+        .neon-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #fff,
+                       0 0 20px #fff,
+                       0 0 40px #0fa,
+                       0 0 80px #0fa;
+        }
+
+        .neon-border {
+            position: relative;
+            border: 2px solid #fff;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .neon-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                transparent 40%,
+                #0fa 40%,
+                #0fa 60%,
+                transparent 60%
+            );
+            transform: rotate(45deg);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(405deg);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .glitch {
+            position: relative;
+            animation: glitch 2s steps(100) infinite;
+        }
+
+        .cyberpunk-bg {
+            background: linear-gradient(45deg, #000428, #004e92);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyberpunk-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #0fa3 0%, transparent 100%);
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .skill-card {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #0fa;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-3xl font-bold neon-text glitch">UJJWAL</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-green-400 transition">HOME</a>
+                    <a href="#about" class="nav-link text-white hover:text-green-400 transition">ABOUT</a>
+                    <a href="#skills" class="nav-link text-white hover:text-green-400 transition">SKILLS</a>
+                    <a href="#contact" class="nav-link text-white hover:text-green-400 transition">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="cyberpunk-bg min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-7xl md:text-9xl font-bold mb-4 neon-text glitch floating">Ujjwal</h1>
+            <p class="text-2xl md:text-3xl mb-8 text-green-400">B.Tech CSE Student | Programmer</p>
+            <div class="flex justify-center space-x-6">
+                <a href="mailto:ujjwal5105@gmail.com" class="neon-border bg-transparent text-white px-8 py-3 rounded-full hover:text-green-400 transition-all duration-300">
+                    CONTACT ME
+                </a>
+                <a href="https://github.com/ujjwal5105" target="_blank" class="neon-border bg-transparent text-white px-8 py-3 rounded-full hover:text-green-400 transition-all duration-300">
+                    GITHUB
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-black relative">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text glitch">About Me</h2>
+            <div class="neon-box bg-black bg-opacity-80 rounded-lg p-8 backdrop-filter backdrop-blur-lg">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <p class="text-xl text-green-400 leading-relaxed">
+                        I'm from Prayagraj, Uttar Pradesh, where I completed my 12th grade education. Currently, I'm pursuing my B.Tech in Computer Science and Engineering, maintaining a CGPA of 5.6.
+                    </p>
+                    <p class="text-xl text-green-400 leading-relaxed">
+                        My programming journey began with C programming, and I've since progressed to C++. I'm passionate about coding and continuously working to improve my skills in software development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 cyberpunk-bg relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text glitch">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="neon-box skill-card rounded-lg p-8 transform hover:scale-105 transition-all duration-300">
+                    <div class="text-green-400 text-5xl mb-6"><i class="fas fa-code"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white neon-text">C Programming</h3>
+                    <p class="text-green-400 text-lg">Strong foundation in C programming fundamentals and algorithmic thinking</p>
+                </div>
+                <div class="neon-box skill-card rounded-lg p-8 transform hover:scale-105 transition-all duration-300">
+                    <div class="text-green-400 text-5xl mb-6"><i class="fas fa-laptop-code"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white neon-text">C++</h3>
+                    <p class="text-green-400 text-lg">Currently advancing skills in C++ development and object-oriented programming</p>
+                </div>
+                <div class="neon-box skill-card rounded-lg p-8 transform hover:scale-105 transition-all duration-300">
+                    <div class="text-green-400 text-5xl mb-6"><i class="fas fa-brain"></i></div>
+                    <h3 class="text-2xl font-semibold mb-4 text-white neon-text">Problem Solving</h3>
+                    <p class="text-green-400 text-lg">Analytical thinking and systematic approach to solving complex problems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 bg-black">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text glitch">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="neon-box bg-black bg-opacity-80 rounded-lg p-8 backdrop-filter backdrop-blur-lg">
+                        <div class="text-green-400 text-5xl mb-6"><i class="fas fa-envelope"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white neon-text">Email</h3>
+                        <a href="mailto:ujjwal5105@gmail.com" class="text-green-400 text-xl hover:text-white transition-colors">ujjwal5105@gmail.com</a>
+                    </div>
+                    <div class="neon-box bg-black bg-opacity-80 rounded-lg p-8 backdrop-filter backdrop-blur-lg">
+                        <div class="text-green-400 text-5xl mb-6"><i class="fab fa-github"></i></div>
+                        <h3 class="text-2xl font-semibold mb-4 text-white neon-text">GitHub</h3>
+                        <a href="https://github.com/ujjwal5105" target="_blank" class="text-green-400 text-xl hover:text-white transition-colors">github.com/ujjwal5105</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-green-400">&copy; 2024 Ujjwal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
